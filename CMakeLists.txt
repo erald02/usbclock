@@ -6,8 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(CLI11 REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
+pkg_check_modules(LIBEVDEV REQUIRED libevdev)
 
 include_directories(${LIBUSB_INCLUDE_DIRS})
+include_directories(${LIBEVDEV_INCLUDE_DIRS})
 
 add_executable(usbclock
     src/main.cpp
@@ -19,4 +21,5 @@ add_executable(usbclock
 target_link_libraries(usbclock
     CLI11::CLI11
     ${LIBUSB_LIBRARIES}
+    ${LIBEVDEV_LIBRARIES}
 )

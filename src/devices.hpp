@@ -2,6 +2,17 @@
 #include <libusb-1.0/libusb.h>
 #include <stdexcept>
 #include <CLI/CLI.hpp>
+#include <string>
+
+struct UsbDeviceInfo {
+    int index;
+    uint16_t vendor_id;
+    uint16_t product_id;
+    std::string manufacturer;
+    std::string product;
+    bool could_open;
+};
+
 
 class UsbContext {
 public:
@@ -22,4 +33,5 @@ private:
 };
 
 void setup_devices_subcommands(CLI::App& app);
-void list_devices();
+void print_devices(const std::vector<UsbDeviceInfo>& devices);
+std::vector<UsbDeviceInfo> fetch_devices();
